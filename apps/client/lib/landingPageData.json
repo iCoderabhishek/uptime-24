@@ -1,0 +1,170 @@
+{
+    "hero": {
+      "title": "Never Miss a Beat",
+      "subtitle": "Uptime24 - Your Guardian Angel for Digital Services",
+      "description": "Monitor your websites, APIs, and services 24/7 with lightning-fast alerts, beautiful analytics, and enterprise-grade reliability. Because every second of downtime costs you customers.",
+      "cta": "Start Monitoring Free",
+      "secondaryCta": "See Live Demo",
+      "stats": [
+        { "value": "99.9%", "label": "Uptime SLA" },
+        { "value": "<30s", "label": "Alert Speed" },
+        { "value": "50K+", "label": "Sites Monitored" }
+      ]
+    },
+    "features": {
+      "section1": {
+        "title": "Real-Time Monitoring That Never Sleeps",
+        "subtitle": "Advanced monitoring infrastructure with global coverage",
+        "items": [
+          {
+            "title": "Lightning-Fast Detection",
+            "description": "Sub-30 second detection with checks every 60 seconds from 15+ global locations.",
+            "icon": "Zap"
+          },
+          {
+            "title": "Multi-Protocol Support",
+            "description": "HTTP/HTTPS, TCP, UDP, ICMP, DNS - monitor everything that matters to your business.",
+            "icon": "Network"
+          },
+          {
+            "title": "Smart False Positive Prevention",
+            "description": "Advanced algorithms prevent false alerts by verifying from multiple checkpoints.",
+            "icon": "Shield"
+          }
+        ]
+      },
+      "section2": {
+        "title": "Alerts That Actually Work",
+        "subtitle": "Get notified instantly, exactly how you want",
+        "items": [
+          {
+            "title": "Omnichannel Notifications",
+            "description": "Email, SMS, Slack, Discord, webhooks, and 20+ integrations. Never miss an alert.",
+            "icon": "Bell"
+          },
+          {
+            "title": "Smart Escalation",
+            "description": "Automatic escalation rules ensure the right person gets notified at the right time.",
+            "icon": "ArrowUp"
+          },
+          {
+            "title": "Custom Alert Logic",
+            "description": "Set up complex conditions, maintenance windows, and intelligent alert grouping.",
+            "icon": "Settings"
+          }
+        ]
+      },
+      "section3": {
+        "title": "Analytics That Drive Decisions",
+        "subtitle": "Beautiful insights that help you optimize performance",
+        "items": [
+          {
+            "title": "Performance Insights",
+            "description": "Track response times, SSL certificate health, and performance trends over time.",
+            "icon": "TrendingUp"
+          },
+          {
+            "title": "Incident Analysis",
+            "description": "Detailed incident reports with root cause analysis and MTTR optimization.",
+            "icon": "BarChart3"
+          },
+          {
+            "title": "Public Status Pages",
+            "description": "Professional status pages that build customer trust during incidents.",
+            "icon": "Globe"
+          }
+        ]
+      }
+    },
+    "pricing": {
+      "title": "Simple, Transparent Pricing",
+      "subtitle": "Start free, scale as you grow. No hidden fees, ever.",
+      "plans": [
+        {
+          "name": "Starter",
+          "price": "Free",
+          "period": "Forever",
+          "description": "Perfect for personal projects and small websites",
+          "features": [
+            "5 monitors",
+            "5-minute checks",
+            "Email alerts",
+            "7-day data retention",
+            "Basic status page"
+          ],
+          "cta": "Start Free",
+          "popular": false
+        },
+        {
+          "name": "Professional",
+          "price": "$9",
+          "period": "per month",
+          "description": "Ideal for growing businesses and development teams",
+          "features": [
+            "50 monitors",
+            "1-minute checks",
+            "All alert channels",
+            "1-year data retention",
+            "Custom status pages",
+            "API access",
+            "Priority support"
+          ],
+          "cta": "Start 14-Day Trial",
+          "popular": true
+        },
+        {
+          "name": "Enterprise",
+          "price": "$29",
+          "period": "per month",
+          "description": "Advanced features for mission-critical applications",
+          "features": [
+            "Unlimited monitors",
+            "30-second checks",
+            "Advanced integrations",
+            "Unlimited data retention",
+            "White-label status pages",
+            "SLA monitoring",
+            "24/7 phone support",
+            "Custom contracts"
+          ],
+          "cta": "Contact Sales",
+          "popular": false
+        }
+      ]
+    },
+    "testimonials": [
+      {
+        "quote": "Uptime24 saved us from a potential $50K loss by detecting our payment gateway failure in under 20 seconds. The ROI was instant.",
+        "author": "Priya Patel",
+        "title": "CTO, EcommerceHub",
+        "avatar": "P"
+      },
+      {
+        "quote": "Finally, an uptime monitoring tool that doesn't cry wolf. Smart alerts and beautiful dashboards make our DevOps team actually happy.",
+        "author": "Marcus Chen",
+        "title": "Lead DevOps Engineer, TechFlow",
+        "avatar": "M"
+      },
+      {
+        "quote": "The public status page alone is worth the price. Our customers love the transparency, and it's reduced support tickets by 40%.",
+        "author": "Sarah Johnson",
+        "title": "Founder, CloudSync",
+        "avatar": "S"
+      },
+      {
+        "quote": "Migration from our previous tool took 10 minutes. The difference in alert accuracy is night and day.",
+        "author": "Raj Sharma",
+        "title": "Infrastructure Lead, DataVault",
+        "avatar": "R"
+      }
+    ],
+    "footer": {
+      "text": "© 2025 Uptime24. Keeping the digital world online, one heartbeat at a time.",
+      "links": [
+        { "label": "Privacy Policy", "href": "#" },
+        { "label": "Terms of Service", "href": "#" },
+        { "label": "Status Page", "href": "#" },
+        { "label": "API Docs", "href": "#" }
+      ]
+    }
+  }

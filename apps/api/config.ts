@@ -1,0 +1,13 @@
+import { config } from "dotenv";
+
+config();
+
+export const JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsMAiIN97zQN9Ozb2yV19
+39+HXr9Jgsqkj0F50LQ/I97VFUXLeZellrDU1NT1cbLusnYCIfNWpR/8q9GJ/asy
+13c/JemeaWvIIz2K2Og5lulT+kiAD8jbXu6B203g5nCqQUswn6Oz9WHE30MdmCGS
+HMaFSimttGCawFtVTEGwoV7t7TxlLw6vRN4xFf0+EXqheMxAtx2CeN6jNOgmmGHm
+7/o2jCAo9stVi359OzL1plXfPsS8CIPAp4N6GrrvUPlnD+U7nXuaI+yl/Rv2VpnS
+poIV6h7Er+dy1TFQBllEFshFdzaEkvDeIYTI/5E4uFq6buzOlx2VY1O7dM5IyJNw
+SQIDAQAB
+-----END PUBLIC KEY-----`
