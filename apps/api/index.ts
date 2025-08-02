@@ -8,7 +8,9 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.post("/api/v1/website", authMiddleware, async (req, res) => {
+app.post("/api/v1/website", async (req, res, next) => {
+    await authMiddleware(req, res, next);
+}, async (req, res) => {
 
 
     const parsedData = createWebsite.safeParse(req.body)
@@ -34,7 +36,9 @@ app.post("/api/v1/website", authMiddleware, async (req, res) => {
 
     
 
-app.get("/api/v1/website/status", authMiddleware, async (req, res) => {
+app.get("/api/v1/website/status", async (req, res, next) => {
+    await authMiddleware(req, res, next);
+}, async (req, res) => {
 
     //add zod if possible -- ofcourse! here I go
 
@@ -60,7 +64,9 @@ app.get("/api/v1/website/status", authMiddleware, async (req, res) => {
     )
 })
 
-app.get("/api/v1/websites",authMiddleware, async (req, res) => {
+app.get("/api/v1/websites", async (req, res, next) => {
+    await authMiddleware(req, res, next);
+}, async (req, res) => {
 
     const userId = req.userId!;
 
@@ -77,7 +83,9 @@ app.get("/api/v1/websites",authMiddleware, async (req, res) => {
     res.json (websites)
 })
 
-app.delete("/api/v1/website/", authMiddleware, async (req, res) => {
+app.delete("/api/v1/website/", async (req, res, next) => {
+    await authMiddleware(req, res, next);
+}, async (req, res) => {
 
     const parsedData = deleteWebsite.safeParse(req.body);
 

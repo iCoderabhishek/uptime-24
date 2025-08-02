@@ -27,7 +27,7 @@ export function useWebsites() {
       },
     });
 
-    setWebsites(response.data.websites);
+    setWebsites(response.data);
   }
 
   useEffect(() => {

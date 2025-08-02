@@ -1,13 +1,25 @@
 import { config } from "dotenv";
+import jwksClient from "jwks-rsa";
 
 config();
 
-export const JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsMAiIN97zQN9Ozb2yV19
-39+HXr9Jgsqkj0F50LQ/I97VFUXLeZellrDU1NT1cbLusnYCIfNWpR/8q9GJ/asy
-13c/JemeaWvIIz2K2Og5lulT+kiAD8jbXu6B203g5nCqQUswn6Oz9WHE30MdmCGS
-HMaFSimttGCawFtVTEGwoV7t7TxlLw6vRN4xFf0+EXqheMxAtx2CeN6jNOgmmGHm
-7/o2jCAo9stVi359OzL1plXfPsS8CIPAp4N6GrrvUPlnD+U7nXuaI+yl/Rv2VpnS
-poIV6h7Er+dy1TFQBllEFshFdzaEkvDeIYTI/5E4uFq6buzOlx2VY1O7dM5IyJNw
-SQIDAQAB
------END PUBLIC KEY-----`
+// Clerk JWKS client
+export const clerkJwksClient = jwksClient({
+  jwksUri: 'https://giving-pug-4.clerk.accounts.dev/.well-known/jwks.json',
+  requestHeaders: {}, // Optional
+  timeout: 30000, // Defaults to 30s
+});
+
+// Function to get signing key
+export const getClerkSigningKey = (kid: string): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    clerkJwksClient.getSigningKey(kid, (err, key) => {
+      if (err) {
+        reject(err);
+      } else {
+        const signingKey = key?.getPublicKey();
+        resolve(signingKey || '');
+      }
+    });
+  });
+};
