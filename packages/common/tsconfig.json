@@ -18,17 +18,11 @@
     "strict": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false,         
+    "noUncheckedIndexedAccess": true,
 
-    // Stricter flags (relaxed for dev convenience)
+    // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-
-    // Relax import errors and let Bun handle unresolved types better
-    "preserveSymlinks": true,                   
-    "resolveJsonModule": true,                 
-    "esModuleInterop": true,                   
-    "forceConsistentCasingInFileNames": false    
+    "noPropertyAccessFromIndexSignature": false
   }
 }

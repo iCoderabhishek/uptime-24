@@ -172,9 +172,10 @@ function App() {
         });
 
         // Window is considered up if majority of ticks are up
-        const upTicks = windowTicks.filter(
-          (tick) => tick.status === "Good"
+        const upTicks = sortedTicks.filter(
+          (tick) => tick.status.toLowerCase() === "good"
         ).length;
+
         windows[9 - i] =
           windowTicks.length === 0
             ? "unknown"
@@ -186,7 +187,7 @@ function App() {
       // Calculate overall status and uptime percentage
       const totalTicks = sortedTicks.length;
       const upTicks = sortedTicks.filter(
-        (tick) => tick.status === "Good"
+        (tick) => tick.status === "good"
       ).length;
       const uptimePercentage =
         totalTicks === 0 ? 100 : (upTicks / totalTicks) * 100;
