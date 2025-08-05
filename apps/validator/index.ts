@@ -5,12 +5,15 @@ import nacl from "tweetnacl";
 import nacl_util from "tweetnacl-util";
 import { config } from "dotenv";
 import bs58 from "bs58";
+import { getPublicIP } from "./utils";
 
 config();
 
 const CALLBACKS: {[callbackId: string]: (data: SignupOutgoingMessage) => void} = {}
 
 let validatorId: string | null = null;
+
+
 
 async function main() {
     const secretKey = bs58.decode(process.env.PRIVATE_KEY!);
@@ -36,13 +39,17 @@ async function main() {
         CALLBACKS[callbackId] = (data: SignupOutgoingMessage) => {
             validatorId = data.validatorId;
         }
+
+        const publicIp = await getPublicIP();
+        console.log('Public IP', publicIp);
+
         const signedMessage = await signMessage(`Signed message for ${callbackId}, ${keypair.publicKey}`, keypair);
 
         ws.send(JSON.stringify({
             type: 'signup',
             data: {
                 callbackId,
-                ip: '127.0.0.1',
+                ip: publicIp,
                 publicKey: keypair.publicKey,
                 signedMessage,
             },

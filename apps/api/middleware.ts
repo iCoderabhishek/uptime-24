@@ -27,7 +27,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
         const signingKey = await getClerkSigningKey(decodedHeader.header.kid);
         
         const decoded = jwt.verify(token, signingKey, { algorithms: ['RS256'] });
-        console.log("Decoded JWT:", decoded);
+        // console.log("Decoded JWT:", decoded);
 
         if (!decoded || typeof decoded !== "object" || !("sub" in decoded)) {
             return res.status(401).json({ error: 'Unauthorized - Invalid token structure' });

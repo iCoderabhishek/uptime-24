@@ -4,11 +4,14 @@ import { prismaClient } from "db/client";
 import { PublicKey } from "@solana/web3.js";
 import nacl from "tweetnacl";
 import nacl_util from "tweetnacl-util";
+import { getLocationFromIP } from "./utils";
 
 const availableValidators: { validatorId: string, socket: ServerWebSocket<unknown>, publicKey: string }[] = [];
 
 const CALLBACKS : { [callbackId: string]: (data: IncomingMessage) => void } = {}
 const COST_PER_VALIDATION = 100; // in lamports
+
+
 
 Bun.serve({
     fetch(req, server) {
@@ -67,12 +70,16 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { ip, publicKey, sign
         return;
     }
     
+    const location = await getLocationFromIP(ip);
+
+
     //TODO: Given the ip, return the location
+    
     const validator = await prismaClient.validator.create({
         data: {
             ip,
             publicKey,
-            location: 'unknown',
+            location
         },
     });
 
@@ -91,9 +98,6 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { ip, publicKey, sign
     });
 }
 
-
-//message -->bytes nacl_util works on bytes only, 
-//messageBytes --> utf8, signature --> bytes, publicKey --> 
 async function verifyMessage(message: string, publicKey: string, signature: string) {
     const messageBytes = nacl_util.decodeUTF8(message);
     const result = nacl.sign.detached.verify(
@@ -141,7 +145,7 @@ setInterval(async () => {
                             data: {
                                 websiteId: website.id,
                                 validatorId,
-                                status: status === "good" ? "Good" : "Bad",
+                                status,
                                 latency,
                                 createdAt: new Date(),
                             },

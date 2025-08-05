@@ -1,44 +1,43 @@
+
 export interface SignupIncomingMessage {
-    ip: string,
-    publicKey: string,
-    signedMessage: string,
-    callbackId: string
+    ip: string;
+    publicKey: string;
+    signedMessage: string;
+    callbackId: string;
 }
 
-
 export interface ValidateIncomingMessage {
-    signedMessage: string,
-    callbackId: string,
-    status: 'good' | 'bad',
-    latency: number,
-    websiteId: string,
-    validatorId: string
+    callbackId: string;
+    signedMessage: string;
+    status: 'Good' | 'Bad';
+    latency: number;
+    websiteId: string;
+    validatorId: string;
 }
 
 export interface SignupOutgoingMessage {
-    callbackId: string,
-    validatorId: string
+    validatorId: string;
+    callbackId: string;
 }
 
 export interface ValidateOutgoingMessage {
     url: string,
     callbackId: string,
-    websiteId: string
-
+    websiteId: string;
 }
 
 export type IncomingMessage = {
-    type: 'signup',
+    type: 'signup'
     data: SignupIncomingMessage
 } | {
-    type: 'validate',
+    type: 'validate'
     data: ValidateIncomingMessage
 }
 
 export type OutgoingMessage = {
-    type: 'signup',
+    type: 'signup'
     data: SignupOutgoingMessage
 } | {
-    type: 'validate',
+    type: 'validate'
     data: ValidateOutgoingMessage
 }

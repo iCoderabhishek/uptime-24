@@ -7,6 +7,9 @@
     "@types/bs58": "^4.0.4",
     "@types/bun": "latest"
   },
+    "scripts": {
+    "dev": "bun index.ts --watch"
+  },
   "peerDependencies": {
     "typescript": "^5"
   }
