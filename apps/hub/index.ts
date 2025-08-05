@@ -71,9 +71,6 @@ async function signupHandler(ws: ServerWebSocket<unknown>, { ip, publicKey, sign
     }
     
     const location = await getLocationFromIP(ip);
-
-
-    //TODO: Given the ip, return the location
     
     const validator = await prismaClient.validator.create({
         data: {
