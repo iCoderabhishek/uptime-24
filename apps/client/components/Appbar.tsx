@@ -9,26 +9,33 @@ import {
 } from "@clerk/nextjs";
 import React from "react";
 import { Activity, Globe, BarChart3 } from "lucide-react";
+import Image from "next/image";
 
 export default function Appbar() {
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-md bg-black/80 border-b border-gray-800/50 shadow-lg shadow-black/20">
-      <div className="max-w-7xl mx-auto px-6 py-4">
+    <nav className="sticky top-0 z-50 backdrop-blur-md bg-transparent border-b border-gray-800 shadow-lg shadow-black/20">
+      <div className="max-w-7xl mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
           {/* Logo Section */}
           <div className="flex items-center space-x-3 group">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-orange-600 to-orange-500 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative p-2 bg-gradient-to-br from-orange-600 to-orange-500 rounded-lg shadow-lg shadow-orange-500/25">
-                <Activity className="w-6 h-6 text-white" />
+              <div className="relative p-2 rounded-lg shadow-sm">
+                <Image
+                  src="/logo.png"
+                  alt="Uptime24 Logo"
+                  width={50} // increased from 30
+                  height={50} // increased from 30
+                  className="object-contain"
+                  priority // ensures it loads quickly
+                />
               </div>
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
                 Uptime24
               </h1>
-              <p className="text-xs text-gray-400 -mt-1">
-                Real-time monitoring
+              <p className="text-sm text-gray-400 -mt-1">
+                Your Distributed Uptime Network
               </p>
             </div>
           </div>

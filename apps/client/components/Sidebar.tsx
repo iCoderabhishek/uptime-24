@@ -119,9 +119,9 @@ export function Sidebar({
         {/* Mobile close button */}
         <button
           onClick={() => setIsCollapsed(true)}
-          className="lg:hidden absolute top-4 right-4 p-2 text-slate-400 hover:text-white transition-colors duration-200 z-10"
+          className="bg-amber-50 lg:hidden absolute top-4 right-4 p-2 text-slate-400 hover:text-white transition-colors duration-200 z-10"
         >
-          <X className="w-5 h-5" />
+          <X className=" w-5 h-5 " />
         </button>
 
         {/* Header */}
@@ -139,10 +139,7 @@ export function Sidebar({
 
         {/* Overview Stats */}
         <div className="relative p-6 border-b border-slate-800/30">
-          <h2 className="text-sm font-semibold text-slate-300 mb-6 flex items-center">
-            <div className="w-5 h-5 mr-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded flex items-center justify-center">
-              <BarChart3 className="w-3 h-3 text-blue-400" />
-            </div>
+          <h2 className=" font-semibold text-slate-300 mb-6 flex items-center">
             Overview
           </h2>
 
@@ -154,9 +151,6 @@ export function Sidebar({
                 <span className="text-slate-400 text-sm font-medium">
                   Overall Uptime
                 </span>
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-lg flex items-center justify-center">
-                  <TrendingUp className="w-4 h-4 text-orange-400" />
-                </div>
               </div>
               <div className="relative text-3xl font-bold text-white mb-1">
                 {mounted ? (
@@ -181,13 +175,10 @@ export function Sidebar({
               <div className="group bg-[#0a0a0a] backdrop-blur-sm rounded-xl p-4 border border-slate-700/30 hover:border-green-500/30 transition-all duration-300 text-center hover:shadow-lg hover:shadow-green-500/5">
                 <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                 <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-green-500/20 to-green-600/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                    <CheckCircle className="w-4 h-4 text-green-50" />
-                  </div>
                   <div className="text-xl font-bold text-green-400 mb-1">
                     {mounted ? <AnimatedCounter value={goodWebsites} /> : "0"}
                   </div>
-                  <div className="text-xs text-slate-400 font-medium">
+                  <div className="text-md text-slate-400 font-medium">
                     Online
                   </div>
                 </div>
@@ -196,9 +187,6 @@ export function Sidebar({
               <div className="group bg-[#0a0a0a] backdrop-blur-sm rounded-xl p-4 border border-slate-700/30 hover:border-red-500/30 transition-all duration-300 text-center hover:shadow-lg hover:shadow-red-500/5">
                 <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                 <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                    <AlertTriangle className="w-4 h-4 text-red-400" />
-                  </div>
                   <div className="text-xl font-bold text-red-400 mb-1">
                     {mounted ? <AnimatedCounter value={badWebsites} /> : "0"}
                   </div>
@@ -209,9 +197,6 @@ export function Sidebar({
               <div className="group bg-[#0a0a0a] backdrop-blur-sm rounded-xl p-4 border border-slate-700/30 hover:border-slate-500/30 transition-all duration-300 text-center hover:shadow-lg hover:shadow-slate-500/5">
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
                 <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-slate-500/20 to-slate-600/20 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                    <Clock className="w-4 h-4 text-slate-400" />
-                  </div>
                   <div className="text-xl font-bold text-slate-400 mb-1">
                     {mounted ? (
                       <AnimatedCounter value={unknownWebsites} />

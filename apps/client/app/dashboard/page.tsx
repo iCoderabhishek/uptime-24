@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo, useCallback, useEffect } from "react";
 import {
   RefreshCw,
   Edit2,
@@ -44,6 +44,7 @@ import { LatencyGraph } from "@/components/LatencyGraph";
 import { WebsiteSummary } from "@/components/WebsiteSummary";
 import { redirect } from "next/navigation";
 import Footer from "@/components/Footer";
+import WebsiteCard from "@/components/WebsiteCard";
 
 type UptimeStatus = "good" | "bad" | "unknown";
 
@@ -193,170 +194,6 @@ interface ProcessedWebsite {
   totalChecks: number;
   successfulChecks: number;
   failedChecks: number;
-}
-
-function WebsiteCard({
-  website,
-  onRecheck,
-  onEdit,
-  onDelete,
-  isRechecking,
-}: {
-  website: ProcessedWebsite;
-  onRecheck: (id: string) => void;
-  onEdit: (website: any) => void;
-  onDelete: (id: string) => void;
-  isRechecking: boolean;
-}) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  return (
-    <div className="bg-[#0a0a0a] border border-gray-600 rounded-xl shadow-xl overflow-hidden hover:border-gray-700 transition-all duration-300">
-      <div
-        className="p-8 cursor-pointer flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 hover:bg-zinc-900 transition-colors duration-200"
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <div className="flex items-center space-x-4">
-          <StatusCircle status={website.status} />
-          <div>
-            <h3 className="font-semibold text-white text-lg">
-              {website.url.replace(/^https?:\/\//, "")}
-            </h3>
-            <div className="flex items-center space-x-4 mt-1">
-              <span className="text-sm text-gray-400 flex items-center">
-                <Clock className="w-3 h-3 mr-1" />
-                {website.lastChecked}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center space-x-6">
-          <div className="text-right">
-            <span
-              className={`text-lg font-bold ${
-                website.uptimePercentage >= 99
-                  ? "text-green-400"
-                  : website.uptimePercentage >= 95
-                    ? "text-orange-400"
-                    : "text-red-400"
-              }`}
-            >
-              {website.uptimePercentage.toFixed(1)}%
-            </span>
-            <div className="text-md text-gray-300 space-y-1">
-              <div className="flex items-center">
-                <Zap className="w-3 h-3 mr-1" />
-                Avg: {website.averageResponseTime}ms
-              </div>
-              <div className="flex items-center">
-                <Clock className="w-3 h-3 mr-1" />
-                Last: {website.lastResponseTime}ms
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={(e) => {
-                e.stopPropagation();
-                onRecheck(website.id);
-              }}
-              disabled={isRechecking}
-              className="text-orange-400 hover:text-orange-300 hover:bg-gray-800 p-2"
-            >
-              <RefreshCw
-                className={`w-4 h-4 ${isRechecking ? "animate-spin" : ""}`}
-              />
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              onClick={(e) => {
-                e.stopPropagation();
-                onEdit(website);
-              }}
-              className="text-blue-400 hover:text-blue-300 hover:bg-gray-800 p-2"
-            >
-              <Edit2 className="w-4 h-4" />
-            </Button>
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={(e) => e.stopPropagation()}
-                  className="text-red-400 hover:text-red-300 hover:bg-gray-800 p-2"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent className="bg-gray-900 border-gray-800">
-                <AlertDialogHeader>
-                  <AlertDialogTitle className="text-white">
-                    Delete Website
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="text-gray-400">
-                    Are you sure you want to delete {website.url}? This action
-                    cannot be undone.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel className="bg-gray-800 text-gray-300 hover:bg-gray-700 border-gray-700">
-                    Cancel
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => onDelete(website.id)}
-                    className="bg-red-600 hover:bg-red-700 text-white"
-                  >
-                    Delete
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-            {isExpanded ? (
-              <ChevronUp className="w-5 h-5 text-gray-400" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-400" />
-            )}
-          </div>
-        </div>
-      </div>
-
-      {isExpanded && (
-        <div className="px-6 pb-6 border-t border-gray-800 bg-gray-800/30">
-          <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
-              <p className="text-sm text-gray-400 mb-2 font-medium">
-                Last 30 minutes status:
-              </p>
-              <UptimeTicks
-                ticks={website.uptimeTicks}
-                tickData={website.tickData}
-              />
-            </div>
-
-            <LatencyGraph
-              data={website.tickData}
-              averageLatency={website.averageResponseTime}
-            />
-            <div className="flex justify-between text-md text-gray-500">
-              <h3 className="text-md font-medium text-gray-300 mb-2">
-                <span className="text-orange-400 pr-1">
-                  {website.totalChecks}
-                </span>{" "}
-                checks:{" "}
-                <span className="text-green-400">
-                  {website.successfulChecks}✓
-                </span>
-                , <span className="text-red-400">{website.failedChecks}✗</span>
-              </h3>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
 }
 
 function App() {
@@ -554,6 +391,16 @@ function App() {
   React.useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate async fetch
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // adjust as per API speed
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className=" min-h-screen bg-black flex">
@@ -580,7 +427,12 @@ function App() {
             </div>
 
             <div className="space-y-6">
-              {filteredWebsites.length === 0 ? (
+              {isLoading ? (
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
+                  <p className="text-gray-500">Loading websites...</p>
+                </div>
+              ) : filteredWebsites.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-xl font-semibold text-gray-400 mb-2">
                     {searchQuery || statusFilter !== "all"
