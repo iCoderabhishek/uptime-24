@@ -20,7 +20,28 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Uptime24",
-  description: "Make your site alive",
+  description: "Your Distributed Uptime Network",
+  openGraph: {
+    title: "Uptime24",
+    description: "Your Distributed Uptime Network",
+    url: "https://uptime24.online",
+    siteName: "Uptime24",
+    images: [
+      {
+        url: "https://uptime24.online/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Uptime24 Preview",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Uptime24",
+    description: "Make your site alive",
+    images: ["https://uptime24.online/preview.png"],
+  },
 };
 
 export default function RootLayout({
