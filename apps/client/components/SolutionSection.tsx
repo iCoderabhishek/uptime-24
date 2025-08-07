@@ -42,17 +42,59 @@ export default function SolutionSection() {
           {steps.map((step, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="text-center p-6 bg-gray-900/50 rounded-xl shadow-lg hover:shadow-orange-500/10 transition"
+              whileHover={{ scale: 1.015 }}
+              whileTap={{ scale: 0.985 }}
+              transition={{
+                type: "spring",
+                stiffness: 80,
+                damping: 18,
+                mass: 0.5,
+                delay: i * 0.3,
+              }}
+              viewport={{ once: true, amount: 0.4 }}
+              className="text-center p-6 bg-gray-900/50 rounded-xl shadow-lg transition-shadow duration-500 hover:shadow-orange-500/20"
             >
-              <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <motion.div
+                whileInView={{ rotate: [0, 3, -3, 0] }}
+                transition={{
+                  duration: 1.2,
+                  delay: i * 0.3 + 0.3,
+                  ease: "easeInOut",
+                }}
+                whileTap={{ scale: 1.08 }}
+                className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg"
+              >
                 {step.icon}
-              </div>
-              <h3 className="text-xl font-semibold mb-4">{step.title}</h3>
-              <p className="text-gray-300">{step.description}</p>
+              </motion.div>
+
+              <motion.h3
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: i * 0.3 + 0.2,
+                  duration: 0.5,
+                  ease: "easeOut",
+                }}
+                whileHover={{ scale: 1.03 }}
+                className="text-xl font-semibold mb-4"
+              >
+                {step.title}
+              </motion.h3>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{
+                  delay: i * 0.3 + 0.4,
+                  duration: 0.6,
+                  ease: "easeOut",
+                }}
+                className="text-gray-300"
+              >
+                {step.description}
+              </motion.p>
             </motion.div>
           ))}
         </div>
