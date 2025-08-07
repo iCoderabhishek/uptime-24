@@ -391,16 +391,6 @@ function App() {
   React.useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate async fetch
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // adjust as per API speed
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className=" min-h-screen bg-black flex">
@@ -427,12 +417,7 @@ function App() {
             </div>
 
             <div className="space-y-6">
-              {isLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500 mx-auto mb-4"></div>
-                  <p className="text-gray-500">Loading websites...</p>
-                </div>
-              ) : filteredWebsites.length === 0 ? (
+              {filteredWebsites.length === 0 ? (
                 <div className="text-center py-12">
                   <div className="text-xl font-semibold text-gray-400 mb-2">
                     {searchQuery || statusFilter !== "all"
