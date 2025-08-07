@@ -49,7 +49,7 @@ export default function Appbar() {
                 {/* Sign In always visible */}
                 <div className="group">
                   <SignInButton>
-                    <button className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 hover:bg-gray-800/50 rounded-lg border border-transparent hover:border-gray-700">
+                    <button className="whitespace-nowrap px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 hover:bg-gray-800/50 rounded-lg border border-transparent hover:border-gray-700">
                       Sign In
                     </button>
                   </SignInButton>
