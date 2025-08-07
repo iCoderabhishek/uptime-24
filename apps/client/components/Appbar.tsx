@@ -46,6 +46,7 @@ export default function Appbar() {
           <div className="flex items-center space-x-4">
             <SignedOut>
               <div className="flex items-center space-x-3">
+                {/* Sign In always visible */}
                 <div className="group">
                   <SignInButton>
                     <button className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200 hover:bg-gray-800/50 rounded-lg border border-transparent hover:border-gray-700">
@@ -53,7 +54,9 @@ export default function Appbar() {
                     </button>
                   </SignInButton>
                 </div>
-                <div className="group">
+
+                {/* Sign Up hidden on small screens */}
+                <div className="group hidden sm:block  ">
                   <SignUpButton>
                     <button className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-orange-600 to-orange-500 hover:from-orange-700 hover:to-orange-600 rounded-lg shadow-lg shadow-orange-500/25 transition-all duration-200 hover:shadow-orange-500/40 hover:scale-105">
                       Sign Up
