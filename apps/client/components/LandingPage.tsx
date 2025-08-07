@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { SignInButton, useUser } from "@clerk/nextjs";
 import { redirect, useRouter } from "next/navigation";
 import Footer from "./Footer";
@@ -47,23 +47,15 @@ export function LandingPage() {
   const { isSignedIn, isLoaded } = useUser();
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (isLoaded && isSignedIn) {
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    if (isSignedIn) {
       router.push("/dashboard");
+    } else {
+      router.push("/");
     }
-  }, [isSignedIn, isLoaded, router]);
-
-  if (!isLoaded) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  if (isSignedIn) {
-    return null; // Will redirect to dashboard
-  }
+  }, [isLoaded, isSignedIn, router]);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white w-full selection:bg-orange-500 selection:text-white">
@@ -72,7 +64,7 @@ export function LandingPage() {
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-4 py-10">
         <div className="text-center max-w-4xl mx-auto  ">
-          <h1 className="text-6xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
+          <h1 className="text-6xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
             Community-Verified
             <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500">
