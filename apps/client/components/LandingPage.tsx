@@ -72,13 +72,10 @@ export function LandingPage() {
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-4 py-10">
         <div className="text-center max-w-4xl mx-auto  ">
-          <h1 className=" text-7xl md:text-6xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
+          <h1 className="text-6xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
             Community-Verified
             <br />
-            <span
-              className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500
-"
-            >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500">
               Uptime Monitoring
             </span>
           </h1>
