@@ -1,42 +1,45 @@
 "use client";
 import React from "react";
 import { SignInButton, useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Footer from "./Footer";
 import GitHubStarBanner from "./GithubStarBanner";
 import { WorldMap } from "./ui/world-map";
 import SolutionSection from "./SolutionSection";
 import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
+import { motion } from "framer-motion";
+import FAQ from "./FAQ";
 
 const testimonials = [
   {
     quote:
-      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
-    name: "Charles Dickens",
-    title: "A Tale of Two Cities",
+      "Uptime24 gave me instant insights into my website’s uptime — no more blind spots or guessing games. It's become an essential part of my dev workflow.",
+    name: "Ravi Patel",
+    title: "Full-Stack Developer @ Codeverse",
   },
   {
     quote:
-      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
-    name: "William Shakespeare",
-    title: "Hamlet",
-  },
-  {
-    quote: "All that we see or seem is but a dream within a dream.",
-    name: "Edgar Allan Poe",
-    title: "A Dream Within a Dream",
+      "What makes Uptime24 different is the validator network. Knowing my site is being checked from real locations gives me confidence traditional monitors couldn’t offer.",
+    name: "Sana Khan",
+    title: "Indie Hacker & SaaS Founder",
   },
   {
     quote:
-      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
-    name: "Jane Austen",
-    title: "Pride and Prejudice",
+      "We integrated Uptime24 as a lightweight uptime monitor for our internal tools. Setup was minimal and it just works — highly recommended for startups.",
+    name: "Abdul Rehman",
+    title: "DevOps Engineer @ Startly",
   },
   {
     quote:
-      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
-    name: "Herman Melville",
-    title: "Moby-Dick",
+      "Finally, an uptime tool that feels modern. The dashboard is clean, the API is simple, and the validator concept is genius.",
+    name: "Isha Agarwal",
+    title: "Product Engineer @ PixelLab",
+  },
+  {
+    quote:
+      "As someone hosting apps on Render and Railway, Uptime24’s pinging system helps avoid cold starts. My apps load faster — users are happier.",
+    name: "Nikhil Verma",
+    title: "Freelance Developer",
   },
 ];
 
@@ -63,19 +66,24 @@ export function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-[#0a0a0a] text-white w-full selection:bg-orange-500 selection:text-white">
       {/* Header */}
       <GitHubStarBanner />
       {/* Hero Section */}
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-7xl md:text-6xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
+        <div className="text-center max-w-4xl mx-auto  ">
+          <h1 className=" text-7xl md:text-6xl font-bold mb-6 leading-tight shadow-md shadow-black/50">
             Community-Verified
             <br />
-            <span className="text-orange-500">Uptime Monitoring</span>
+            <span
+              className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500
+"
+            >
+              Uptime Monitoring
+            </span>
           </h1>
 
-          <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl text-neutral-400 mb-8 leading-relaxed max-w-3xl mx-auto selection:bg-orange-500 selection:text-white">
             Stop relying on single-point monitoring. Uptime24 uses real people
             around the world to verify if your websites are actually accessible
             to your users.
@@ -122,11 +130,19 @@ export function LandingPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <SignInButton mode="modal">
-              <button className="bg-orange-500 hover:bg-orange-600 text-black px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+              <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-black px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200">
                 Start Monitoring Free
               </button>
             </SignInButton>
-            <button className="border border-gray-600 hover:border-gray-500 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors duration-200">
+            <button
+              className="cursor-pointer border border-gray-600 hover:border-gray-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-colors duration-200"
+              onClick={() =>
+                window.open(
+                  "https://github.com/iCoderabhishek/uptime-24.git",
+                  "_blank"
+                )
+              }
+            >
               Learn More
             </button>
           </div>
@@ -180,18 +196,19 @@ export function LandingPage() {
                 </div>
                 <div className="text-center text-gray-400 text-sm">vs</div>
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between p-3 bg-red-900/20 border border-red-800 rounded-lg text-sm">
-                    <span className="text-red-400">User in Tokyo</span>
-                    <span className="text-red-400 font-mono">Timeout</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-red-900/20 border border-red-800 rounded-lg text-sm">
-                    <span className="text-red-400">User in London</span>
-                    <span className="text-red-400 font-mono">DNS Error</span>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-red-900/20 border border-red-800 rounded-lg text-sm">
-                    <span className="text-red-400">User in Sydney</span>
-                    <span className="text-red-400 font-mono">Slow Load</span>
-                  </div>
+                  {[
+                    { location: "User in Tokyo", status: "Timeout" },
+                    { location: "User in London", status: "DNS Error" },
+                    { location: "User in Sydney", status: "Slow Load" },
+                  ].map(({ location, status }) => (
+                    <div
+                      key={location}
+                      className="flex items-center justify-between p-3 bg-red-900/20 border border-red-800 rounded-lg text-sm text-red-400 transition duration-300 hover:border-red-500 hover:shadow-md hover:scale-[1.02]"
+                    >
+                      <span>{location}</span>
+                      <span className="font-mono">{status}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -209,34 +226,67 @@ export function LandingPage() {
                 Live Validation Network
               </h3>
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-green-900/20 border border-green-800 rounded-lg">
-                  <div>
-                    <div className="font-semibold">New York, USA</div>
-                    <div className="text-sm text-gray-400">2 seconds ago</div>
-                  </div>
-                  <span className="text-green-400 font-mono">✓ Online</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-green-900/20 border border-green-800 rounded-lg">
-                  <div>
-                    <div className="font-semibold">London, UK</div>
-                    <div className="text-sm text-gray-400">5 seconds ago</div>
-                  </div>
-                  <span className="text-green-400 font-mono">✓ Online</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-green-900/20 border border-green-800 rounded-lg">
-                  <div>
-                    <div className="font-semibold">Tokyo, Japan</div>
-                    <div className="text-sm text-gray-400">8 seconds ago</div>
-                  </div>
-                  <span className="text-green-400 font-mono">✓ Online</span>
-                </div>
-                <div className="flex items-center justify-between p-4 bg-orange-900/20 border border-orange-800 rounded-lg">
-                  <div>
-                    <div className="font-semibold">Sydney, Australia</div>
-                    <div className="text-sm text-gray-400">12 seconds ago</div>
-                  </div>
-                  <span className="text-orange-400 font-mono">⚠ Slow</span>
-                </div>
+                {[
+                  {
+                    city: "New York, USA",
+                    time: "2 seconds ago",
+                    status: "✓ Online",
+                    bg: "bg-green-900/20",
+                    border: "border-green-800",
+                    hoverBorder: "hover:border-green-500",
+                    text: "text-green-400",
+                  },
+                  {
+                    city: "London, UK",
+                    time: "5 seconds ago",
+                    status: "✓ Online",
+                    bg: "bg-green-900/20",
+                    border: "border-green-800",
+                    hoverBorder: "hover:border-green-500",
+                    text: "text-green-400",
+                  },
+                  {
+                    city: "Tokyo, Japan",
+                    time: "8 seconds ago",
+                    status: "✓ Online",
+                    bg: "bg-green-900/20",
+                    border: "border-green-800",
+                    hoverBorder: "hover:border-green-500",
+                    text: "text-green-400",
+                  },
+                  {
+                    city: "Sydney, Australia",
+                    time: "12 seconds ago",
+                    status: "⚠ Slow",
+                    bg: "bg-orange-900/20",
+                    border: "border-orange-800",
+                    hoverBorder: "hover:border-orange-500",
+                    text: "text-orange-400",
+                  },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.city}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    whileHover={{ scale: 1.015 }}
+                    whileTap={{ scale: 0.985 }}
+                    transition={{
+                      duration: 0.4,
+                      ease: "easeOut",
+                      delay: i * 0.15,
+                    }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    className={`flex items-center justify-between p-4 ${item.bg} border ${item.border} ${item.hoverBorder} rounded-lg transition duration-300 ease-in-out hover:shadow-md`}
+                  >
+                    <div>
+                      <div className="font-semibold">{item.city}</div>
+                      <div className="text-sm text-gray-400">{item.time}</div>
+                    </div>
+                    <span className={`${item.text} font-mono`}>
+                      {item.status}
+                    </span>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
@@ -260,7 +310,7 @@ export function LandingPage() {
                   </h3>
                   <p className="text-gray-300">
                     Get insights into actual loading times, functionality, and
-                    user-facing issues that automated tools miss.
+                    user-facing ises that automated tools miss.
                   </p>
                 </div>
                 <div className="border-l-4 border-orange-500 pl-6">
@@ -282,7 +332,7 @@ export function LandingPage() {
           <h2 className="text-4xl font-bold mb-6">
             Trusted by Industry Leaders
           </h2>
-          <p className="text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl text-neutral-400 mb-12 leading-relaxed max-w-3xl mx-auto">
             Join thousands of developers who trust their monitoring to the
             community.
           </p>
@@ -291,13 +341,13 @@ export function LandingPage() {
         <InfiniteMovingCards
           items={testimonials}
           direction="right"
-          speed="slow"
+          speed="normal"
         />
       </section>
       {/* Pricing Section */}
       <section className="border-t border-gray-800 bg-[#0a0a0a] py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4">
+          <h2 className="text-4xl font-bold mb-4 text-neutral-300">
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-300 mb-12">
@@ -342,7 +392,7 @@ export function LandingPage() {
                 </li>
               </ul>
               <SignInButton mode="modal">
-                <button className="w-full bg-orange-500 hover:bg-orange-600 text-black py-3 rounded-lg font-semibold transition">
+                <button className=" cursor-pointer w-full bg-orange-500 hover:bg-orange-600 text-black py-3 rounded-lg font-semibold transition">
                   Start Free Monitoring
                 </button>
               </SignInButton>
@@ -350,26 +400,37 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <FAQ />
       {/* CTA Section */}
       <section className="border-t border-gray-800">
-        <div className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to get real uptime data?
-          </h2>
-          <p className="text-xl text-gray-300 mb-12">
-            Join thousands of developers who trust their monitoring to the
-            community.
-          </p>
-          <SignInButton mode="modal">
-            <button className="bg-orange-500 hover:bg-orange-600 text-black px-12 py-4 rounded-lg font-semibold text-xl transition-colors duration-200">
-              Start Free Monitoring
-            </button>
-          </SignInButton>
-          <p className="text-gray-400 mt-4">
-            No credit card required • Free forever plan available
-          </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 grid grid-cols-12 gap-y-8 text-center">
+          <div className="col-span-12">
+            <h2 className="text-4xl sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-900">
+              Decentralized. Deterministic. Distributed.
+            </h2>
+          </div>
+
+          <div className="col-span-12 md:col-start-3 md:col-span-8">
+            <p className="text-xl text-neutral-500">
+              Uptime monitoring powered by a global validator network.
+            </p>
+          </div>
+
+          <div className="col-span-12 ">
+            <SignInButton mode="modal">
+              <button className="cursor-pointer bg-orange-500 hover:bg-orange-600 text-black px-10 py-4 rounded-lg font-semibold text-lg sm:text-xl transition-colors duration-200">
+                Start monitoring or contribute as a validator.
+              </button>
+            </SignInButton>
+            <p className="text-gray-400 mt-4 text-sm">
+              No credit card required • Free forever plan available
+            </p>
+          </div>
         </div>
       </section>
+
       <Footer />
     </div>
   );
