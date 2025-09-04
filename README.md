@@ -16,7 +16,7 @@
 
 ```bash
 # Clone repo
-[git clone https://github.com/iCoderabhishek/uptime24.git](https://github.com/iCoderabhishek/uptime-24.git)
+git clone https://github.com/iCoderabhishek/uptime-24.git
 cd uptime24
 
 # Install dependencies
