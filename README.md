@@ -5,6 +5,9 @@
 
 **Decentralized uptime monitoring** powered by web3. Instead of relying on a single server, Uptime24 lets real users validate whether a site is **up or down**. The status is determined by community consensus.
 
+<img width="1898" height="924" alt="image" src="https://github.com/user-attachments/assets/995c2c0c-1da5-4dfb-8d6c-96bab64c92c7" />
+
+
 ##  Features
 
 * **Crowdsourced validation** – users confirm if a site is up/down.
